@@ -29,7 +29,6 @@ module.exports.index = async(req, res) => {
     } else {
         const index = filterStatus.findIndex(item => item.status == "");
         filterStatus[index].class = "active";
-        
     }
 
     let find = {
@@ -76,4 +75,16 @@ module.exports.index = async(req, res) => {
         pagination: objectPagination
     });
    
+}
+
+// [PATCH]/admin/product/change-status/:status/:id
+module.exports.changeStatus = async (req, res) => {
+    console.log(req.params);
+    const status = req.params.status;
+    const id = req.params.id;
+
+    await Product.updateOne ({_id: id}, {status: status})
+    
+    // res.send(`${status} - ${id}`);
+    res.redirect('back');
 }
