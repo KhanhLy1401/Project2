@@ -3,7 +3,7 @@
 // import model vào 
 const Product = require("../../models/product.model")
 
-
+const paginationHelper = require("../../helpers/pagination")
 module.exports.index = async(req, res) => {
     let filterStatus = [
         {
@@ -50,24 +50,24 @@ module.exports.index = async(req, res) => {
         find.title = regex;
     }
 
+
     // Pagination
-    let objectPagination = {
-        currentPage: 1,
-        limitItems: 4
-    }
-
-    if(req.query.page){
-        objectPagination.currentPage = parseInt(req.query.page);
-    }
-
-    objectPagination.skip = (objectPagination.currentPage-1)*objectPagination.limitItems;
-    
+   
     const countProducts = await Product.countDocuments(find);
-    const totalPage = Math.ceil(countProducts/(objectPagination.limitItems));
-    objectPagination.totalPage = totalPage;
+
+    let objectPagination = paginationHelper(
+        {
+            currentPage: 1,
+            limitItems: 4
+        }, 
+        req.query,
+        countProducts
+    );
+  
     // End pagination
 
     const products = await Product.find(find).limit(objectPagination.limitItems).skip(objectPagination.skip);
+    
     res.render("admin/pages/products/index", {
         pageTitle: "Trang Sản phẩm",
         products: products,
