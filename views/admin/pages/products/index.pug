@@ -8,23 +8,13 @@ block main
         .card-body
             .row
                 .col-6
-                if(buttonsStatus.length > 0){
-    let url = new URL(window.location.href);
-    
-    buttonsStatus.forEach(button =>{
-        button.addEventListener("click", ()=>{
-            const status = button.getAttribute("button-status");
-            
-            if(status) {
-                url.searchParams.set("status", status);
-            } else {
-                url.searchParams.delete("status");
-            }
+                    each item in filterStatus 
+                        button(
+                            class=`btn btn-sm ml-1 btn-outline-success ${item.class}`
+                            button-status=item.status
+                           )   #{item.name}
 
-            window.location.href = url.href;
-        })
-    })
-}
+                
                 .col-6 
                     form(id="form-search")
                         .input-group

@@ -18,7 +18,7 @@ module.exports.index = async(req, res) => {
         },
         {
             name: "Dừng hoạt động",
-            status: "",
+            status: "inactive",
             class: ""
         }
     ]

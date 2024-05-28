@@ -8,7 +8,7 @@ if(buttonsStatus.length > 0){
     buttonsStatus.forEach(button =>{
         button.addEventListener("click", ()=>{
             const status = button.getAttribute("button-status");
-            
+            // nếu có status thì set lại biến status thành biến status nếu 
             if(status) {
                 url.searchParams.set("status", status);
             } else {

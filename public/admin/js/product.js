@@ -15,7 +15,7 @@ if(buttonsChangeStatus.length > 0){
             console.log(statusCurrent);
             console.log(statusChange);
             // Khi nhấn vào thì thêm path mới
-            const action = path + `/${statusChange}/${id}?method=PATCH`;
+            const action = path + `/${statusChange}/${id}?_method=PATCH`;
             console.log(action);
             
             formChangeStatus.action = action;
