@@ -1,5 +1,6 @@
 const express = require('express');
-var methodOverride = require('method-override');
+const methodOverride = require('method-override');
+const bodyParser = require('body-parser');
 require("dotenv").config();
 
 const route = require("./routes/client/index.route")
@@ -18,6 +19,9 @@ const port = process.env.PORT;
 
 // ghi đè
 app.use(methodOverride('_method'));
+
+//parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({extended: false}));
 
 app.set("views", "./views");
 app.set("view engine", "pug");
