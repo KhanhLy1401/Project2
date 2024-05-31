@@ -1,11 +1,12 @@
 extends ../../layouts/default.pug 
-
+include ../../mixins/form-change-multi.pug
 block main 
     h1 Trang danh sách sản phẩm
 
     .card.mb-3 
         .card-header Bộ lọc và tìm kiếm 
         .card-body
+            +form-change-multi(`${prefixAdmin}/products/change-multi?_method=PATCH`)
             .row
                 .col-6
                     each item in filterStatus 
@@ -33,24 +34,7 @@ block main
     .card.mb-3
         .card-header Danh sách 
             .card-body
-                form(
-                    action=`${prefixAdmin}/products/change-multi?_method=PATCH`
-                    method="POST"
-                    form-change-multi
-                )
-                    .d-flex.align-items-start 
-                        .form-group
-                            select(name="type" class="form-control")
-                                option(value="active") Hoạt động
-                                option(value="inactive") Dừng hoạt động
-                        .form-group
-                            input(
-                                type="text"
-                                name="ids"
-                                value=""
-                                class="form-control d-none"
-                            )
-                        button(type="submit" class="btn btn-primary") Áp dụng
+                
                 table(
                     class="table table-hover table-sm"
                     checkbox-multi
@@ -102,7 +86,11 @@ block main
 
                                 td 
                                     button(class="btn btn-warning btn-sm") Sửa
-                                    button(class="btn btn-danger btn-sm ml-1") Xóa
+                                    button(
+                                        class="btn btn-danger btn-sm ml-1"
+                                        button-delete
+                                        data-id=item.id
+                                    ) Xóa
         nav
             ul(class="pagination")
 
