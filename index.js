@@ -1,6 +1,10 @@
 const express = require('express');
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser')
+const flash = require('express-flash');
+const session = require('express-session');
+// const cookieParser = require('cookie-parser');
 require("dotenv").config();
 
 const route = require("./routes/client/index.route")
@@ -25,6 +29,21 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.set("views", "./views");
 app.set("view engine", "pug");
+
+// // Flash
+app.use(cookieParser('keyboard cat'));
+// app.use(session({ 
+//     secret: "secret key",
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie:{
+//         maxAge: 60000 
+//     }
+// }));
+app.use(session({cookie: {maxAge: 60000}}));
+app.use(flash());
+
+// End flash
 
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
