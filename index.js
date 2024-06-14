@@ -27,7 +27,7 @@ app.use(methodOverride('_method'));
 //parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.set("views", "./views");
+app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
 
 // // Flash
@@ -47,7 +47,8 @@ app.use(flash());
 
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
-app.use(express.static("public"));
+
+app.use(express.static(`${__dirname}/public`));
 
 routeAdmin(app);
 route(app);
