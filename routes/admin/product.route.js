@@ -1,25 +1,16 @@
 const express = require("express");
 const multer = require("multer");
-// var cloudinary = require('cloudinary');
-const cloudinary = require('cloudinary').v2;
-const streamifier = require('streamifier');
 const router = express.Router();
 // const upload = multer({dest: "./public/uploads/"});
 
-// cloudinary
-cloudinary.config({ 
-    cloud_name: 'dkfeinc1k', 
-    api_key: '789487126862347', 
-    api_secret: 'AAnmyYdhZ47lINxKOBKAzXESTUQ'
-  });
 
-// AAnmyYdhZ47lINxKOBKAzXESTUQ
-// end cloudinary
 const upload = multer();
 
 
 const controller = require("../../controllers/admin/product.controller");
 const validate = require("../../validate/admin/product.validate")
+
+const uploadCloud = require("../../middlewares/admin/uploadCloud.middleware")
 // khi /product thì sẽ gọi đến controller product.controller ở admin
 router.get("/", controller.index)
 
@@ -34,30 +25,7 @@ router.get("/create", controller.create);
 router.post(
     "/create", 
     upload.single('thumbnail'),
-    function (req, res, next) {
-        let streamUpload = (req) => {
-            return new Promise((resolve, reject) => {
-                let stream = cloudinary.uploader.upload_stream(
-                  (error, result) => {
-                    if (result) {
-                      resolve(result);
-                    } else {
-                      reject(error);
-                    }
-                  }
-                );
-    
-              streamifier.createReadStream(req.file.buffer).pipe(stream);
-            });
-        };
-    
-        async function upload(req) {
-            let result = await streamUpload(req);
-            console.log(result);
-        }
-    
-        upload(req);
-    },
+    uploadCloud.upload,
     validate.createPost, 
     controller.createPost
 );
