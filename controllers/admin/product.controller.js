@@ -160,7 +160,10 @@ module.exports.deleteItem = async (req, res) => {
 
     await Product.updateOne({_id: id}, {
         deleted: true,
-        deleteAt: new Date()
+        deletedBy: {
+            account_id: res.locals.user.id,
+            deletedAt: new Date()
+        }
     });
 
     res.redirect("back");
