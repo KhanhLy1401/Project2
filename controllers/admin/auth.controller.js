@@ -4,13 +4,18 @@ const systemConfig = require("../../config/system");
 
 //[GET] /admin/auth/login
 module.exports.login = async (req, res) => {
+    if(req.cookies.token) {
+        res.redirect(`${systemConfig.prefixAdmin}/dashboard`);
+    } else {
+        res.render("admin/pages/auth/login", {
+            pageTitle: "Trang đăng nhập",
+        })
+    }
     
-    res.render("admin/pages/auth/login", {
-        pageTitle: "Trang đăng nhập",
-    })
 }
 
 //[POST] /admin/auth/login
+// đăng nhập thành công lưu token vào cookie 
 module.exports.loginPost = async (req, res) => {
     console.log(req.body);
     const email = req.body.email;
@@ -42,4 +47,9 @@ module.exports.loginPost = async (req, res) => {
     
 }
 
-// đăng nhập thành công lưu token vào cookie 
+//[POST] /admin/auth/logout
+// xóa token trong cookie
+module.exports.logout = async (req, res) => {
+    res.clearCookie("token");
+    res.redirect(`${systemConfig.prefixAdmin}/auth/login`);
+}
