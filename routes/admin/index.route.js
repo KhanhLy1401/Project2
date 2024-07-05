@@ -13,6 +13,6 @@ module.exports = (app) => {
     app.use(PATH_ADMIN+ "/products", authMiddleware.requireAuth, productRoutes);
     app.use(PATH_ADMIN+ "/products-category", authMiddleware.requireAuth, productCategoryRoutes);
     app.use(PATH_ADMIN+ "/roles", authMiddleware.requireAuth, roleRoutes);
-    app.use(PATH_ADMIN+ "/accounts", accountRoutes);
+    app.use(PATH_ADMIN+ "/accounts", authMiddleware.requireAuth, accountRoutes);
     app.use(PATH_ADMIN+ "/auth", authRoutes);
 }
