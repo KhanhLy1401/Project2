@@ -87,6 +87,7 @@ block main
                                 th Giá 
                                 th Vị trí
                                 th Người tạo
+                                th Cập nhật
                                 th Trạng thái 
                                 th Hành động
                         tbody
@@ -120,6 +121,13 @@ block main
                                         p #{item.accountFullName}
                                         p
                                             +formatDateTime(item.createdBy.createdAt)
+                                    td 
+                                        - const updatedBy = item.updatedBy[item.updatedBy.length-1]
+                                        if(updatedBy)
+                                            p #{item.accountFullName}
+                                            p
+                                                +formatDateTime(item.createdBy.updatedAt)
+
                                     td  
                                         if (item.status == "active")
                                             a(href=`javascript:;`
