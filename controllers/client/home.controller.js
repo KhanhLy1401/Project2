@@ -19,7 +19,7 @@ module.exports.index = async (req, res) => {
     // HẾt lấy ra sản phẩm nổi bật
 
 
-    const newProducts = productsHelper.priceNewProducts(productsFeatured);
+    const newProducts = productsHelper.priceNewProducts1(productsFeatured);
     // const newProductsCategory = createTreeHelper.tree(productsCategory);
 
     // Hiển thị ra sản phẩm mới nhất
@@ -29,7 +29,7 @@ module.exports.index = async (req, res) => {
 
     }).sort({position: "desc"}).limit(6);
 
-    const newProductsNew = productsHelper.priceNewProducts(productsNew);
+    const newProductsNew = productsHelper.priceNewProducts1(productsNew);
     // Hết Hiển thị ra sản phẩm mới nhất
 
     res.render("client/pages/home/index", {
