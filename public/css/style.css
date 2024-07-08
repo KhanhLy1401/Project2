@@ -82,7 +82,7 @@
 }
 
 .product-item .inner-content .inner-price-new {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
     color: green;
 }
@@ -197,3 +197,40 @@
     color: #fff;
     background-color: green;
 }
+
+/* Show alert */
+[show-alert]{
+    position: fixed;
+    top: 70px;
+    right: 15px;
+    z-index: 9999;
+}
+
+[show-alert].alert-hidden{
+    animation-name: alert-hidden;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+    
+}
+
+@keyframes alert-hidden {
+    from {
+        right: 15px;
+    } to{
+        right: -100%;
+        display: none;
+    }
+}
+
+[show-alert][close-alert] {
+    background-color: #ffffffc4;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 50%;
+    cursor: pointer;
+}
+/* End show alert-hidden */
