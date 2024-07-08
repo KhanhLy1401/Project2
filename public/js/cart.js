@@ -5,8 +5,9 @@ if(inputsQuantity.length > 0) {
         input.addEventListener("change", (e)=> {
             const productId = input.getAttribute("product-id");
             const quantity = input.value;
-
-            window.location.href=`/cart/update/${productId}/${quantity}`;
+            if(quantity > 1) {
+                window.location.href=`/cart/update/${productId}/${quantity}`;
+            }
         })
     })
 }
