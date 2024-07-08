@@ -5,7 +5,7 @@ if(showAlert){
 
     setTimeout(()=>{
         showAlert.classList.add("alert-hidden");
-    }, time);
+    }, 3000);
 
     closeAlert.addEventListener("click", ()=>{
         showAlert.classList.add("alert-hidden");
@@ -13,3 +13,14 @@ if(showAlert){
 
 }
 //End show alert
+
+//Button go back
+const buttonsGoBack = document.querySelectorAll("[button-go-back]");
+if(buttonsGoBack.length > 0 ){
+    buttonsGoBack.forEach(button => {
+        button.addEventListener("click", ()=> {
+            history.back();
+        })
+    })
+}
+// End button go back
