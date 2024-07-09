@@ -102,3 +102,10 @@
     display: none;
 }
 /* End Image-Preview */
+
+a.active {
+    color: #fff; /* Change text color */
+    background-color: #007bff; /* Change background color */
+    font-weight: bold; /* Make text bold */
+    /* Add any other styles you want */
+}

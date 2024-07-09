@@ -206,3 +206,25 @@ if(sort){
 
 }
 //End sort
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const currentUrl = window.location.pathname;
+    
+    if (currentUrl.includes('/dashboard')) {
+        document.getElementById('dashboard-link').classList.add('active');
+    } else if (currentUrl.includes('/products')) {
+        document.getElementById('products-link').classList.add('active');
+    } else if (currentUrl.includes('/products-category')) {
+        document.getElementById('products-category-link').classList.add('active');
+    } else if (currentUrl.includes('/roles') && !currentUrl.includes('/roles/permissions')) {
+        document.getElementById('roles-link').classList.add('active');
+    } else if (currentUrl.includes('/roles/permissions')) {
+        document.getElementById('permissions-link').classList.add('active');
+    } else if (currentUrl.includes('/accounts')) {
+        document.getElementById('accounts-link').classList.add('active');
+    } else if (currentUrl.includes('/settings/general')) {
+        document.getElementById('settings-link').classList.add('active');
+    }
+});
+
