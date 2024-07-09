@@ -71,3 +71,10 @@ module.exports.logout = async (req, res) => {
     res.clearCookie("tokenUser")
     res.redirect("/");
 }
+
+//[GET] /user/info
+module.exports.info = async (req, res)=> {
+    res.render("client/pages/user/info", {
+        pageTitle:"Thông tin tài khoản",
+    })
+}
