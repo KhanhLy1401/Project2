@@ -1,5 +1,5 @@
 const categoryMiddleware = require("../../middlewares/client/category.middleware")
-
+const userMiddleware = require("../../middlewares/client/user.middleware");
 const cartMiddleware= require("../../middlewares/client/cart.middleware")
 
 //Lấy biến app từ index.js truyền sang
@@ -12,6 +12,7 @@ const userRoutes = require("./user.route");
 module.exports = (app) => {
     app.use(categoryMiddleware.category);
     app.use(cartMiddleware.cartId);
+    app.use(userMiddleware.infoUser);
 
     app.use("/", homeRoutes);
 
