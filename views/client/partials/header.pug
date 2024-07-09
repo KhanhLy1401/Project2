@@ -1,12 +1,14 @@
 include ../mixins/sub-menu.pug
 header.header
     .container 
+        //- div #{settingGeneral}
         .row.align-items-center
             .col-3
                 .inner-logo
                     a(href="/")
-                        img(src="/images/logo.jpg", width="100px" alt="Logo")
-                
+                        img(src=settingGeneral.logo, width="100px" alt="Logo")
+
+
             .col-5
                 form(
                     action="/search"

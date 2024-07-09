@@ -1,4 +1,5 @@
 const User = require("../../models/user.model")
+const Cart = require("../../models/cart.model")
 const md5=require("md5")
 //[GET] user/register
 
@@ -24,6 +25,7 @@ module.exports.registerPost = async (req, res) => {
     req.body.password= md5(req.body.password);
     const user = new User(req.body);
     await user.save();
+
 
     res.cookie("tokenUser", user.tokenUser);
     res.redirect("/")
@@ -61,6 +63,13 @@ module.exports.loginPost = async (req, res) => {
         res.redirect("back");
         return;
     }
+
+    //Lưu user_id vào collection carts
+    await Cart.updateOne({
+        _id: req.cookies.cartId
+    },{
+        user_id: user.id
+    })
 
     res.cookie("tokenUser", user.tokenUser);
     res.redirect("/")
