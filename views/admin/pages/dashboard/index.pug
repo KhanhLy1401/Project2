@@ -21,6 +21,15 @@ block main
                         p Số điện thoại: <b>#{user.phone}</b>
                     if(role.title)
                         p Phân quyền: <b>#{role.title}</b>
+        .col-12
+            .card.mb-4
+                .card-header Đơn hàng 
+                .card-body
+                    p Số lượng <b> #{statistic.categoryProduct.total}
+                    a(
+                        href=`${prefixAdmin}/dashboard/order`
+                        class="btn btn-warning"
+                    ) Chi tiết
         .col-6
             .card.mb-4
                 .card-header Danh mục sản phẩm 

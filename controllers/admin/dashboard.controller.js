@@ -2,9 +2,15 @@ const Product = require("../../models/product.model")
 const Account = require("../../models/account.model")
 const User = require("../../models/user.model")
 const ProductsCategory = require("../../models/products-category.model")
+const Order = require("../../models/order.model")
+const productsHelper = require("../../helpers/products")
+
 // [GET]/admin/this.dashboard
 module.exports.dashboard = async (req, res) => {
     const statistic = {
+        order: {
+            total: 0,
+        },
         categoryProduct: {
             total: 0,
             active: 0,
@@ -26,6 +32,10 @@ module.exports.dashboard = async (req, res) => {
             inactive:0
         }
     }
+
+    statistic.order.total = await Order.countDocuments({
+    });
+
     statistic.categoryProduct.total = await ProductsCategory.countDocuments({
         deleted: false
     });
@@ -82,4 +92,28 @@ module.exports.dashboard = async (req, res) => {
         pageTitle: "Trang tổng quan",
         statistic: statistic
     });
+}
+
+// [GET]/admin/dashboard/order
+module.exports.dashboardOrder = async (req, res) => {
+    const orders = await Order.find({});
+    for(const order of orders) {
+        order.totalPrice = 0;
+        for(const product of order.products) {
+            const productInfo = await Product.findOne({
+                _id: product.product_id
+            }).select("title thumbnail")
+            product.productInfo=productInfo;
+            product.priceNew = productsHelper.priceNewProducts2(product);
+            product.totalPrice = product.priceNew * product.quantity;
+            order.totalPrice += product.totalPrice
+        }
+        
+    }
+    
+    res.render("admin/pages/dashboard/order", {
+        pageTitle: "Đơn đặt hàng",
+
+        order: orders
+    })
 }
