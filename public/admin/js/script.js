@@ -213,10 +213,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (currentUrl.includes('/dashboard')) {
         document.getElementById('dashboard-link').classList.add('active');
-    } else if (currentUrl.includes('/products')) {
-        document.getElementById('products-link').classList.add('active');
-    } else if (currentUrl.includes('/products-category')) {
+    } else if (currentUrl.includes('/products-category') ) {
         document.getElementById('products-category-link').classList.add('active');
+    } else if (currentUrl.includes('/products')&& !currentUrl.includes('cagtegory')) {
+        document.getElementById('products-link').classList.add('active');
     } else if (currentUrl.includes('/roles') && !currentUrl.includes('/roles/permissions')) {
         document.getElementById('roles-link').classList.add('active');
     } else if (currentUrl.includes('/roles/permissions')) {
